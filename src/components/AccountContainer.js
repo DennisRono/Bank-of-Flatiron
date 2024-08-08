@@ -39,10 +39,6 @@ function AccountContainer() {
     setFilteredTransactions(filtered)
   }, [searchTerm, transactions])
 
-  const handleSearch = (term) => {
-    setSearchTerm(term)
-  }
-
   const handleSubmit = async (e) => {
     try {
       e.preventDefault()
@@ -76,7 +72,7 @@ function AccountContainer() {
 
   return (
     <div>
-      <Search handleSearch={handleSearch} />
+      <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <AddTransactionForm
         formData={formData}
         setFormData={setFormData}
