@@ -46,6 +46,14 @@ function AccountContainer() {
   const handleSubmit = async (e) => {
     try {
       e.preventDefault()
+      if (
+        !formData.amount ||
+        formData.category ||
+        formData.date ||
+        formData.description
+      ) {
+        throw new Error('Please fill out the form!')
+      }
       const res = await fetch('http://localhost:8001/transactions', {
         method: 'POST',
         headers: {
