@@ -33,9 +33,26 @@ function AccountContainer() {
   }, [])
 
   useEffect(() => {
-    const filtered = transactions.filter((transaction) =>
-      transaction.description.toLowerCase().includes(searchTerm.toLowerCase())
-    )
+    const filtered = transactions
+      .filter((transaction) =>
+        transaction.description.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+      .sort((a, b) => {
+        if (a.category.toLowerCase() < b.category.toLowerCase()) {
+          return -1
+        }
+        if (a.category.toLowerCase() > b.category.toLowerCase()) {
+          return 1
+        }
+        if (a.description.toLowerCase() < b.description.toLowerCase()) {
+          return -1
+        }
+        if (a.description.toLowerCase() > b.description.toLowerCase()) {
+          return 1
+        }
+        return 0
+      })
+
     setFilteredTransactions(filtered)
   }, [searchTerm, transactions])
 
