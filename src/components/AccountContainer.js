@@ -87,6 +87,18 @@ function AccountContainer() {
     }
   }
 
+  const deleteTransaction = async (id) => {
+    const res = await fetch(`http://localhost:8001/transactions/${id}`, {
+      method: 'DELETE',
+    })
+
+    if (res.ok) {
+      fetchTransactions()
+    } else {
+      console.error(`Failed to delete transaction with id ${id}`)
+    }
+  }
+
   return (
     <div>
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -95,7 +107,10 @@ function AccountContainer() {
         setFormData={setFormData}
         handleSubmit={handleSubmit}
       />
-      <TransactionsList transactions={filteredTransactions} />
+      <TransactionsList
+        transactions={filteredTransactions}
+        deleteTransaction={deleteTransaction}
+      />
     </div>
   )
 }
